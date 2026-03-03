@@ -10,8 +10,8 @@
     <packaging>jar</packaging>
 
     <properties>
-        <kotlin.version>2.0.21</kotlin.version>
-        <ktor.version>3.0.3</ktor.version>
+        <kotlin.version>2.2.0</kotlin.version>
+        <ktor.version>3.3.2</ktor.version>
         <logback.version>1.4.14</logback.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.ktor.server.netty.EngineMain</mainClass>
+                            <mainClass>com.example.ApplicationKt</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -75,7 +75,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>io.ktor.server.netty.EngineMain</mainClass>
+                    <mainClass>com.example.ApplicationKt</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,7 +91,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>io.ktor.server.netty.EngineMain</mainClass>
+                                    <mainClass>com.example.ApplicationKt</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
