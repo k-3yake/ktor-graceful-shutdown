@@ -1,0 +1,11 @@
+# Build output
+target/
+
+# IDE
+.idea/
+
+# Maven Wrapper jar
+.mvn/wrapper/maven-wrapper.jar
+
+# OS
+.DS_Store

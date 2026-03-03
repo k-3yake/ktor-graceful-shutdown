@@ -1,0 +1,40 @@
+{
+  "name": "Kotlin DateTime Comparison",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "TZ": "${localEnv:TZ:Asia/Tokyo}",
+      "CLAUDE_CODE_VERSION": "latest",
+      "GIT_DELTA_VERSION": "0.18.2",
+      "ZSH_IN_DOCKER_VERSION": "1.2.0"
+    }
+  },
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=NET_RAW"
+  ],
+  "customizations": {
+    "jetbrains": {
+      "backend": "IU",
+      "plugins": [
+        "org.jetbrains.kotlin"
+      ]
+    }
+  },
+  "remoteUser": "developer",
+  "mounts": [
+    "source=kotlin-datetime-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=kotlin-datetime-claude-config-${devcontainerId},target=/home/developer/.claude,type=volume",
+    "source=kotlin-datetime-gradle-cache-${devcontainerId},target=/home/developer/.gradle,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/developer/.claude",
+    "GRADLE_USER_HOME": "/home/developer/.gradle",
+    "JAVA_HOME": "/opt/java/openjdk",
+    "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "postStartCommand": "sudo /usr/local/bin/init-firewall.sh",
+  "waitFor": "postStartCommand"
+}
