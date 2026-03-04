@@ -7,6 +7,8 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.*
 import java.net.InetSocketAddress
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 /**
@@ -19,15 +21,16 @@ import java.util.concurrent.TimeUnit
  *   4. 両方の完了を待機
  *   5. callEventGroup.shutdownGracefully(0, timeout)
  *
- * Netty単独（2グループ）での対応:
+ * Netty単独での対応:
  *   connectionEventGroup → bossGroup
  *   workerEventGroup → workerGroup
- *   callEventGroup → なし（この版では未実装）
+ *   callEventGroup → callExecutor
  */
 class NettyHttpServerNearKtor3_4_0(private val port: Int = 0) : TestableServer {
 
     private val bossGroup = NioEventLoopGroup(1)
     private val workerGroup = NioEventLoopGroup()
+    private val callExecutor: ExecutorService = Executors.newFixedThreadPool(4)
     private var serverChannel: Channel? = null
 
     override val actualPort: Int
@@ -43,7 +46,7 @@ class NettyHttpServerNearKtor3_4_0(private val port: Int = 0) : TestableServer {
                     ch.pipeline().addLast(
                         HttpServerCodec(),
                         HttpObjectAggregator(65536),
-                        RequestHandler()
+                        RequestHandler(callExecutor)
                     )
                 }
             })
@@ -62,5 +65,9 @@ class NettyHttpServerNearKtor3_4_0(private val port: Int = 0) : TestableServer {
         // ステップ4: 両方の完了を待機
         shutdownBoss.sync()
         shutdownWorker.sync()
+
+        // ステップ5: callExecutorを最後にシャットダウン
+        callExecutor.shutdown()
+        callExecutor.awaitTermination(timeoutSeconds, TimeUnit.SECONDS)
     }
 }
