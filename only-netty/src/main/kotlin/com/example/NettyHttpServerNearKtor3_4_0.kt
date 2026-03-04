@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit
 class NettyHttpServerNearKtor3_4_0(private val port: Int = 0) : TestableServer {
 
     private val bossGroup = NioEventLoopGroup(1)
-    private val workerGroup = NioEventLoopGroup()
+    private val workerGroup = NioEventLoopGroup(1)
     private val callExecutor: ExecutorService = Executors.newFixedThreadPool(4)
     private var serverChannel: Channel? = null
 
@@ -69,5 +69,12 @@ class NettyHttpServerNearKtor3_4_0(private val port: Int = 0) : TestableServer {
         // ステップ5: callExecutorを最後にシャットダウン
         callExecutor.shutdown()
         callExecutor.awaitTermination(timeoutSeconds, TimeUnit.SECONDS)
+    }
+
+    override fun printState(label: String) {
+        println("=== [$label] NettyHttpServerNearKtor3_4_0 内部状態 ===")
+        printEventLoopGroupState("bossGroup", bossGroup)
+        printEventLoopGroupState("workerGroup", workerGroup)
+        println("=== [$label] END ===")
     }
 }

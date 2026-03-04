@@ -6,7 +6,9 @@ import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.*
+import io.netty.util.concurrent.SingleThreadEventExecutor
 import java.net.InetSocketAddress
+import java.nio.channels.Selector
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit
 class NettyHttpServer(private val port: Int = 0) : TestableServer {
 
     private val bossGroup = NioEventLoopGroup(1)
-    private val workerGroup = NioEventLoopGroup()
+    private val workerGroup = NioEventLoopGroup(1)
     private val callExecutor: ExecutorService = Executors.newFixedThreadPool(4)
     private var serverChannel: Channel? = null
 
@@ -48,5 +50,12 @@ class NettyHttpServer(private val port: Int = 0) : TestableServer {
         // 3. worker/bossをシャットダウン
         workerGroup.shutdownGracefully(gracePeriodSeconds, timeoutSeconds, TimeUnit.SECONDS)
         bossGroup.shutdownGracefully(gracePeriodSeconds, timeoutSeconds, TimeUnit.SECONDS)
+    }
+
+    override fun printState(label: String) {
+        println("=== [$label] NettyHttpServer 内部状態 ===")
+        printEventLoopGroupState("bossGroup", bossGroup)
+        printEventLoopGroupState("workerGroup", workerGroup)
+        println("=== [$label] END ===")
     }
 }
