@@ -1,0 +1,22 @@
+2026-03-04 08:28:03.984 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2026-03-04 08:28:04.100 [main] INFO  Application - Application started in 0.339 seconds.
+2026-03-04 08:28:04.273 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2026-03-04 08:28:05.516 [eventLoopGroupProxy-4-1] TRACE io.ktor.server.routing.Routing - Trace for [health]
+/, segment:0 -> SUCCESS @ /
+  /health, segment:1 -> SUCCESS @ /health
+    /health/(method:GET), segment:1 -> SUCCESS @ /health/(method:GET)
+  /slow, segment:0 -> FAILURE "Selector didn't match" @ /slow
+Matched routes:
+  "" -> "health" -> "(method:GET)"
+Routing resolve result:
+  SUCCESS @ /health/(method:GET)
+2026-03-04 08:28:05.556 [eventLoopGroupProxy-4-2] TRACE io.ktor.server.routing.Routing - Trace for [slow]
+/, segment:0 -> SUCCESS @ /
+  /health, segment:0 -> FAILURE "Selector didn't match" @ /health
+  /slow, segment:1 -> SUCCESS @ /slow
+    /slow/(method:GET), segment:1 -> SUCCESS @ /slow/(method:GET)
+Matched routes:
+  "" -> "slow" -> "(method:GET)"
+Routing resolve result:
+  SUCCESS @ /slow/(method:GET)
+--- SIGTERM sent at 2026-03-04 08:28:07.550 ---

@@ -1,0 +1,42 @@
+2026-03-04 10:10:31.538 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+=== Shutdown config: gracePeriod=15000, timeout=20000 ===
+2026-03-04 10:10:31.736 [main] INFO  Application - Application started in 0.412 seconds.
+=== ApplicationStarted at 1772586631736 ===
+=== CUSTOM JVM SHUTDOWN HOOK at 1772586632686 ===
+=== ApplicationStopPreparing at 1772586632687 ===
+=== ApplicationStopping at 1772586647718 ===
+Exception in thread "main" java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.b=== /slow request started at 1772586984256 ===
+=== /slow request completed at 1772586994257 ===
+=== CUSTOM JVM SHUTDOWN HOOK at 1772587009413 ===
+=== ApplicationStopPreparing at 1772587009413 ===
+Exception in thread "KtorShutdownHook" java.lang.NoClassDefFoundError: io/netty/channel/AbstractChannelHandlerContext$4
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:627)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:452)
+	at io.netty.channel.DefaultChannelPipeline.close(DefaultChannelPipeline.java:978)
+	at io.netty.channel.Channel.close(Channel.java:312)
+	at io.ktor.server.netty.NettyApplicationEngine.stop(NettyApplicationEngine.kt:286)
+	at io.ktor.server.engine.EmbeddedServer.stop(EmbeddedServerJvm.kt:345)
+	at io.ktor.server.engine.EmbeddedServer.stop(EmbeddedServerJvm.kt:358)
+	at io.ktor.server.engine.EmbeddedServer.stop$default(EmbeddedServerJvm.kt:357)
+	at io.ktor.server.engine.EmbeddedServer.start$lambda$0(EmbeddedServerJvm.kt:309)
+	at io.ktor.server.engine.ShutdownHook.run(ShutdownHookJvm.kt:38)
+Caused by: java.lang.ClassNotFoundException: io.netty.channel.AbstractChannelHandlerContext$4
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 10 more
+LocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+	Suppressed: java.util.concurrent.CompletionException: Rethrowing promise failure cause
+		at io.netty.util.concurrent.DefaultPromise.rethrowIfFailed(DefaultPromise.java:686)
+		at io.netty.util.concurrent.DefaultPromise.sync(DefaultPromise.java:420)
+		at io.netty.channel.DefaultChannelPromise.sync(DefaultChannelPromise.java:119)
+		at io.netty.channel.DefaultChannelPromise.sync(DefaultChannelPromise.java:30)
+		at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:254)
+		at io.ktor.server.netty.NettyApplicationEngine.start(NettyApplicationEngine.kt:38)
+		at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:335)
+		at io.ktor.server.netty.EngineMain.main(EngineMain.kt:25)
+		at com.example.ApplicationKt.main(Application.kt:10)
+=== ApplicationStopped at 1772586647728 ===

@@ -1,0 +1,7 @@
+2026-03-04 10:05:55.486 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+=== Shutdown config: gracePeriod=15000, timeout=20000 ===
+2026-03-04 10:05:55.620 [main] INFO  Application - Application started in 0.366 seconds.
+2026-03-04 10:05:55.793 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+=== JVM SHUTDOWN HOOK TRIGGERED at 1772586358992 ===
+=== ApplicationStopping event received at 1772586389070 ===
+=== ApplicationStopped event received at 1772586389072 ===

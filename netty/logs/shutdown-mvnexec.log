@@ -1,0 +1,7 @@
+2026-03-04 09:54:23.133 [com.example.ApplicationKt.main()] INFO  Application - Autoreload is disabled because the development mode is off.
+2026-03-04 09:54:23.386 [com.example.ApplicationKt.main()] INFO  Application - === Shutdown config: gracePeriod=15000, timeout=20000 ===
+2026-03-04 09:54:23.446 [com.example.ApplicationKt.main()] INFO  Application - Application started in 0.802 seconds.
+2026-03-04 09:54:23.723 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+=== JVM SHUTDOWN HOOK TRIGGERED at 1772585672797 ===
+2026-03-04 09:54:52.834 [KtorShutdownHook] INFO  Application - === ApplicationStopping event received ===
+2026-03-04 09:54:52.836 [KtorShutdownHook] INFO  Application - === ApplicationStopped event received ===

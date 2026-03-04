@@ -1,0 +1,69 @@
+2026-03-04 09:55:17.595 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2026-03-04 09:55:17.927 [main] INFO  Application - === Shutdown config: gracePeriod=15000, timeout=20000 ===
+2026-03-04 09:55:17.982 [main] INFO  Application - Application started in 0.959 seconds.
+2026-03-04 09:55:18.403 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+=== JVM SHUTDOWN HOOK TRIGGERED at 1772585721788 ===
+Exception in thread "eventLoopGroupProxy-3-1" Exception in thread "eventLoopGroupProxy-4-1" java.lang.NoClassDefFoundError: ch/qos/logback/classic/spi/ThrowableProxy
+	at ch.qos.logback.classic.spi.LoggingEvent.<init>(LoggingEvent.java:143)
+	at ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:424)
+	at ch.qos.logback.classic.Logger.filterAndLog_0_Or3Plus(Logger.java:386)
+	at ch.qos.logback.classic.Logger.log(Logger.java:780)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.log(LocationAwareSlf4JLogger.java:46)
+	at io.netty.util.internal.logging.LocationAwareSlf4JLogger.error(LocationAwareSlf4JLogger.java:249)
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:881)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:514)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:650)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:639)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:111)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1283)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ClassNotFoundException: ch.qos.logback.classic.spi.ThrowableProxy
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 15 more
+java.lang.NoClassDefFoundError: io/netty/buffer/FreeChunkEvent
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.onRelease(AdaptivePoolingAllocator.java:1322)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.deallocate(AdaptivePoolingAllocator.java:1283)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.release(AdaptivePoolingAllocator.java:1247)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.releaseFromMagazine(AdaptivePoolingAllocator.java:1266)
+	at io.netty.buffer.AdaptivePoolingAllocator$SizeClassedChunk.releaseFromMagazine(AdaptivePoolingAllocator.java:1438)
+	at io.netty.buffer.AdaptivePoolingAllocator$Magazine.free(AdaptivePoolingAllocator.java:1060)
+	at io.netty.buffer.AdaptivePoolingAllocator$MagazineGroup.free(AdaptivePoolingAllocator.java:475)
+	at io.netty.buffer.AdaptivePoolingAllocator$MagazineGroup.access$300(AdaptivePoolingAllocator.java:355)
+	at io.netty.buffer.AdaptivePoolingAllocator$1.onRemoval(AdaptivePoolingAllocator.java:205)
+	at io.netty.buffer.AdaptivePoolingAllocator$1.onRemoval(AdaptivePoolingAllocator.java:192)
+	at io.netty.util.concurrent.FastThreadLocal.removeAndGet(FastThreadLocal.java:286)
+	at io.netty.util.concurrent.FastThreadLocal.remove(FastThreadLocal.java:268)
+	at io.netty.util.concurrent.FastThreadLocal.removeAll(FastThreadLocal.java:68)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1273)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ClassNotFoundException: io.netty.buffer.FreeChunkEvent
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 17 more
+Exception in thread "eventLoopGroupProxy-3-2" java.lang.NoClassDefFoundError: io/netty/buffer/FreeChunkEvent
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.onRelease(AdaptivePoolingAllocator.java:1322)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.deallocate(AdaptivePoolingAllocator.java:1283)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.release(AdaptivePoolingAllocator.java:1247)
+	at io.netty.buffer.AdaptivePoolingAllocator$Chunk.releaseFromMagazine(AdaptivePoolingAllocator.java:1266)
+	at io.netty.buffer.AdaptivePoolingAllocator$SizeClassedChunk.releaseFromMagazine(AdaptivePoolingAllocator.java:1438)
+	at io.netty.buffer.AdaptivePoolingAllocator$Magazine.free(AdaptivePoolingAllocator.java:1060)
+	at io.netty.buffer.AdaptivePoolingAllocator$MagazineGroup.free(AdaptivePoolingAllocator.java:475)
+	at io.netty.buffer.AdaptivePoolingAllocator$MagazineGroup.access$300(AdaptivePoolingAllocator.java:355)
+	at io.netty.buffer.AdaptivePoolingAllocator$1.onRemoval(AdaptivePoolingAllocator.java:205)
+	at io.netty.buffer.AdaptivePoolingAllocator$1.onRemoval(AdaptivePoolingAllocator.java:192)
+	at io.netty.util.concurrent.FastThreadLocal.removeAndGet(FastThreadLocal.java:286)
+	at io.netty.util.concurrent.FastThreadLocal.remove(FastThreadLocal.java:268)
+	at io.netty.util.concurrent.FastThreadLocal.removeAll(FastThreadLocal.java:68)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1273)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ClassNotFoundException: io.netty.buffer.FreeChunkEvent
+	... 17 more
