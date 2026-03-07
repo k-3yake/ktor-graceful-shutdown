@@ -12,7 +12,7 @@ spec:
       labels:
         app: ktor-app
     spec:
-      terminationGracePeriodSeconds: 45
+      terminationGracePeriodSeconds: 60
       containers:
         - name: ktor-app
           image: ktor-graceful-shutdown:latest
@@ -28,4 +28,4 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: ["sleep", "15"]
+                command: ["sleep", "35"]

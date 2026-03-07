@@ -1,0 +1,34 @@
+2026-03-07T01:00:38.672875513Z 2026-03-07 01:00:38.670 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2026-03-07T01:00:38.880436514Z 2026-03-07 01:00:38.880 [main] INFO  Application - Application started in 0.464 seconds.
+2026-03-07T01:00:38.880476810Z 2026-03-07 01:00:38.880 [main] INFO  Application - [EVENT] Application started
+2026-03-07T01:00:39.050896288Z 2026-03-07 01:00:39.050 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2026-03-07T01:00:46.108110187Z 2026-03-07 01:00:46.107 [eventLoopGroupProxy-4-3] INFO  Application - [EVENT] /slow request received - starting 30s processing
+2026-03-07T01:01:16.109393423Z 2026-03-07 01:01:16.108 [DefaultDispatcher-worker-3] INFO  Application - [EVENT] /slow response sending - processing complete
+--- client timeline ---
+01:00:46.094 [CLIENT] curl /slow 送信
+01:00:48.101 [CLIENT] kubectl rollout restart 実行
+01:01:16.120 [CLIENT] curl 完了 HTTP 200
+--- pod status ---
+container startedAt:  2026-03-07T01:00:37Z
+container finishedAt: 2026-03-07T01:01:44Z
+container exitCode:   143
+container reason:     Error
+pod deletionTimestamp: 2026-03-07T01:01:55Z
+--- k8s events ---
+2026-03-07T01:00:37Z Scheduled Successfully assigned default/ktor-app-7d894c78d9-j6hp2 to minikube
+2026-03-07T01:00:37Z Pulled Container image "ktor-graceful-shutdown:latest" already present on machine
+2026-03-07T01:00:37Z Created Created container: ktor-app
+2026-03-07T01:00:37Z Started Started container ktor-app
+2026-03-07T01:00:55Z Killing Stopping container ktor-app
+2026-03-07T01:01:44Z Unhealthy Readiness probe failed: Get "http://10.244.0.8:8080/health": dial tcp 10.244.0.8:8080: connect: connection refused
+
+
+-- 要約--
+01:00:46.094 [CLIENT] curl /slow 送信
+01:00:48      rollout restart
+01:00:55      [K8S] Killing Stopping container ← preStop開始の合図
+            → ここから sleep 35 が走る
+01:01:16      /slow レスポンス完了 (preStop中なのでSIGTERM未送信、処理継続できた)
+01:01:30頃    preStop完了 (55秒 + 35秒 = 01:01:30)
+            → SIGTERM送信
+01:01:44      container finishedAt (SIGTERM受信後にプロセス終了)

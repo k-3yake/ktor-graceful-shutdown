@@ -1,0 +1,12 @@
+2026-03-07T00:28:36.629492078Z 2026-03-07 00:28:36.627 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2026-03-07T00:28:36.832104589Z 2026-03-07 00:28:36.831 [main] INFO  Application - Application started in 0.572 seconds.
+2026-03-07T00:28:36.832154538Z 2026-03-07 00:28:36.832 [main] INFO  Application - [EVENT] Application started
+2026-03-07T00:28:37.029487338Z 2026-03-07 00:28:37.029 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2026-03-07T00:29:59.747188109Z 2026-03-07 00:29:59.746 [eventLoopGroupProxy-4-2] INFO  Application - [EVENT] /slow request received - starting 30s processing
+2026-03-07T00:30:09.887451592Z 2026-03-07 00:30:09.886 [Thread-0] INFO  com.example.Application - [EVENT] SIGTERM received - JVM shutdown hook triggered
+--- client timeline ---
+00:29:59.734 [CLIENT] curl /slow 送信
+00:30:01.742 [CLIENT] kubectl rollout restart 実行
+00:30:09.898 [CLIENT] curl 完了 HTTP 000
+--- pod status ---
+pod: 既に削除済み（terminated → deleted）
