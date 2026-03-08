@@ -263,6 +263,17 @@ override fun stop(gracePeriodMillis: Long, timeoutMillis: Long) {
 | callEventGroupの停止タイミング | worker/callが同時に開始 | worker/callが同時に開始 | **connection/worker完了後** |
 | 時間管理 | なし | なし | **measureTimeMillisで残時間を計算** |
 
+#### shutdownConnections.await()が無くなった理由
+```
+connectionEvetnGroupは接続受付、workerEventGroupはサーバー内でのリクエストの処理を受け持つ。  
+3.0.1ではconnectionEvetnGroup.shutdownGracefully().await()→workerEventGroup.shutdownGracefully().await()の流れでシーケンシャルに実行。  
+それにより、gracePeriodの2倍の待機時間が発生していた。  
+実害としては、開発体験の低下、k8s環境で予期せず生き残ってしまい（期待通りの時間で落ちない）ため、sigkillされるということが考えられる。  
+これに対応するため、3.3.1でそれぞれのshutdownGracefully()を実行後にawait()する対応が入れられた。  
+ちなみに3.4.0でsync()になっているのは例外を伝播させるためだと思われる。  
+```
+
+
 ### その他の発見
 
 #### stop()の二重呼び出し
